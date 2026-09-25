@@ -13,6 +13,8 @@ Built around the problems real bullion desks have:
 - Customers want to buy when the price drops, so limit orders are filled by a matching engine.
 - Traders want to know when the price moves, so rate alerts are pushed in real time.
 
+**Frontend:** [**bullion-desk**](https://github.com/sudesh1456/bullion-desk), a React trading and admin dashboard that talks to this API over REST + SignalR ([live demo](https://sudesh1456.github.io/bullion-desk/)).
+
 ![API reference](docs/api-reference.png)
 
 ## Features
