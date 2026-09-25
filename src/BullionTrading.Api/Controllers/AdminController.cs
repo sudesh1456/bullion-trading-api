@@ -23,8 +23,8 @@ public class AdminController(AppDbContext db, OrderService orders, RateBook rate
 
     /// <summary>All products, including inactive ones.</summary>
     [HttpGet("products")]
-    public async Task<IEnumerable<ProductDto>> Products(CancellationToken ct) =>
-        (await db.Products.AsNoTracking().OrderBy(p => p.Id).ToListAsync(ct)).Select(p => ProductDto.From(p, rates.Latest(p.Metal)));
+    public async Task<IEnumerable<AdminProductDto>> Products(CancellationToken ct) =>
+        (await db.Products.AsNoTracking().OrderBy(p => p.Id).ToListAsync(ct)).Select(p => AdminProductDto.From(p, rates.Latest(p.Metal)));
 
     /// <summary>Adjust premiums/discounts or suspend trading for a product. Takes effect on the next quote.</summary>
     [HttpPut("products/{id:int}/pricing")]

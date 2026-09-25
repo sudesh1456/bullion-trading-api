@@ -212,6 +212,9 @@ public class TradingApiTests : IClassFixture<ApiFactory>
 
         Assert.Equal(11_000m, product.BuyPrice); // 1 g coin at 10,000 + 10%
         Assert.Equal(9_500m, product.SellPrice);
+
+        var listed = await admin.GetFromJsonAsync<List<AdminProductDto>>("/api/admin/products", ApiFactory.Json);
+        Assert.Contains(listed!, p => p.Id == 1 && p.BuyPremiumPct == 10m && p.SellDiscountPct == 5m);
     }
 
     [Fact]

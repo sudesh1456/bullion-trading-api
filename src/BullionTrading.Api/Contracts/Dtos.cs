@@ -18,6 +18,16 @@ public record ProductDto(int Id, string Sku, string Name, Metal Metal, int Purit
     }
 }
 
+/// <summary>Admin view of a product, including the pricing inputs.</summary>
+public record AdminProductDto(int Id, string Sku, string Name, Metal Metal, int Purity, decimal WeightGrams, decimal? BuyPrice, decimal? SellPrice, bool IsActive, decimal BuyPremiumPct, decimal SellDiscountPct)
+{
+    public static AdminProductDto From(Product p, SpotTick? spot)
+    {
+        var dto = ProductDto.From(p, spot);
+        return new(dto.Id, dto.Sku, dto.Name, dto.Metal, dto.Purity, dto.WeightGrams, dto.BuyPrice, dto.SellPrice, dto.IsActive, p.BuyPremiumPct, p.SellDiscountPct);
+    }
+}
+
 public record QuoteRequest(int ProductId, Side Side, [Range(1, 10_000)] int Quantity);
 
 public record QuoteDto(Guid QuoteId, int ProductId, Side Side, int Quantity, decimal UnitPrice, decimal Total, DateTimeOffset ExpiresAt);
